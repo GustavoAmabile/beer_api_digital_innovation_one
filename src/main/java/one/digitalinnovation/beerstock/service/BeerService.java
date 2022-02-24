@@ -42,6 +42,7 @@ public class BeerService {
                 .collect(Collectors.toList());
     }
 
+    //Parte 10
     public void deleteById(Long id) throws BeerNotFoundException {
         verifyIfExists(id);
         beerRepository.deleteById(id);
@@ -59,6 +60,9 @@ public class BeerService {
                 .orElseThrow(() -> new BeerNotFoundException(id));
     }
 
+
+    //Parte 13
+    //Parte 14
     public BeerDTO increment(Long id, int quantityToIncrement) throws BeerNotFoundException, BeerStockExceededException {
         Beer beerToIncrementStock = verifyIfExists(id);
         int quantityAfterIncrement = quantityToIncrement + beerToIncrementStock.getQuantity();
@@ -69,4 +73,16 @@ public class BeerService {
         }
         throw new BeerStockExceededException(id, quantityToIncrement);
     }
+
+    public BeerDTO decrement(Long id, int quantityToDecrement) throws BeerNotFoundException, BeerStockExceededException {
+        Beer beerToDecrementStock = verifyIfExists(id);
+        int beerStockAfterDecremented = beerToDecrementStock.getQuantity() - quantityToDecrement;
+        if (beerStockAfterDecremented >= 0) {
+            beerToDecrementStock.setQuantity(beerStockAfterDecremented);
+            Beer decrementedBeerStock = beerRepository.save(beerToDecrementStock);
+            return beerMapper.toDTO(decrementedBeerStock);
+        }
+        throw new BeerStockExceededException(id, quantityToDecrement);
+    }
+
 }

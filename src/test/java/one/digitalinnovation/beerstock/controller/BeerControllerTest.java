@@ -122,6 +122,8 @@ public class BeerControllerTest {
                 .andExpect(status().isNotFound());
     }
 
+
+    //Parte 9
     @Test
     void whenGETListWithBeersIsCalledThenOkStatusIsReturned() throws Exception {
         // given
@@ -139,6 +141,7 @@ public class BeerControllerTest {
                 .andExpect(jsonPath("$[0].type", is(beerDTO.getType().toString())));
     }
 
+    //Parte 9
     @Test
     void whenGETListWithoutBeersIsCalledThenOkStatusIsReturned() throws Exception {
         // given
@@ -167,6 +170,7 @@ public class BeerControllerTest {
                 .andExpect(status().isNoContent());
     }
 
+    //Parte 11
     @Test
     void whenDELETEIsCalledWithInvalidIdThenNotFoundStatusIsReturned() throws Exception {
         //when
@@ -178,6 +182,7 @@ public class BeerControllerTest {
                 .andExpect(status().isNotFound());
     }
 
+    //Parte 14
     @Test
     void whenPATCHIsCalledToIncrementDiscountThenOKstatusIsReturned() throws Exception {
         QuantityDTO quantityDTO = QuantityDTO.builder()
@@ -197,6 +202,8 @@ public class BeerControllerTest {
                 .andExpect(jsonPath("$.type", is(beerDTO.getType().toString())))
                 .andExpect(jsonPath("$.quantity", is(beerDTO.getQuantity())));
     }
+
+
 
 //    @Test
 //    void whenPATCHIsCalledToIncrementGreatherThanMaxThenBadRequestStatusIsReturned() throws Exception {
