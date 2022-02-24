@@ -31,6 +31,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+//Parte 4
 @ExtendWith(MockitoExtension.class)
 public class BeerControllerTest {
 
@@ -74,6 +75,8 @@ public class BeerControllerTest {
                 .andExpect(jsonPath("$.type", is(beerDTO.getType().toString())));
     }
 
+
+    //Parte 5
     @Test
     void whenPOSTIsCalledWithoutRequiredFieldThenAnErrorIsReturned() throws Exception {
         // given
@@ -87,6 +90,7 @@ public class BeerControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
+    //Parte 7 e Parte 8
     @Test
     void whenGETIsCalledWithValidNameThenOkStatusIsReturned() throws Exception {
         // given

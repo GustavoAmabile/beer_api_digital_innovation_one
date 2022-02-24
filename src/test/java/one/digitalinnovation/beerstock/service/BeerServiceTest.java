@@ -50,6 +50,8 @@ public class BeerServiceTest {
     @InjectMocks
     private BeerService beerService;
 
+
+    //Parte 1
     @Test
     void whenBeerInformedThenItShouldBeCreated() throws BeerAlreadyRegisteredException {
         // given
@@ -60,14 +62,19 @@ public class BeerServiceTest {
         when(beerRepository.findByName(expectedBeerDTO.getName())).thenReturn(Optional.empty());
         when(beerRepository.save(expectedSavedBeer)).thenReturn(expectedSavedBeer);
 
+        //Parte 2
         //then
         BeerDTO createdBeerDTO = beerService.createBeer(expectedBeerDTO);
 
         assertThat(createdBeerDTO.getId(), is(equalTo(expectedBeerDTO.getId())));
         assertThat(createdBeerDTO.getName(), is(equalTo(expectedBeerDTO.getName())));
         assertThat(createdBeerDTO.getQuantity(), is(equalTo(expectedBeerDTO.getQuantity())));
+
+        //Parte 3
+        //assertThat(createdBeerDTO.getQuantity(), is(greaterThan(2)));
     }
 
+    //Parte 3/2
     @Test
     void whenAlreadyRegisteredBeerInformedThenAnExceptionShouldBeThrown() {
         // given
@@ -77,6 +84,7 @@ public class BeerServiceTest {
         // when
         when(beerRepository.findByName(expectedBeerDTO.getName())).thenReturn(Optional.of(duplicatedBeer));
 
+        //Parte 4
         // then
         assertThrows(BeerAlreadyRegisteredException.class, () -> beerService.createBeer(expectedBeerDTO));
     }
@@ -96,6 +104,7 @@ public class BeerServiceTest {
         assertThat(foundBeerDTO, is(equalTo(expectedFoundBeerDTO)));
     }
 
+    //Parte 7
     @Test
     void whenNotRegisteredBeerNameIsGivenThenThrowAnException() {
         // given
